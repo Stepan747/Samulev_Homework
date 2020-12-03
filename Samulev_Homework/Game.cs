@@ -60,7 +60,7 @@ namespace Samulev_ThePrincess
 
                 if (player.HP < 1)
                 {
-                    Game.GameResult = "You lose, fucking asshole.";
+                    Game.GameResult = "You lose!";
                 }
 
                 cell = "0";
