@@ -2,7 +2,7 @@
 
 namespace Samulev_ThePrincess
 {
-    class Map
+    public class Map
     {
         private const string princess = "G";
         private const string Player = "B";
