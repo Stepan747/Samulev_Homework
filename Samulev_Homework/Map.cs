@@ -4,14 +4,14 @@ namespace Samulev_ThePrincess
 {
     class Map
     {
-        const string Princess = "G";
-        const string Player = "B";
-        const string EmptyCell = "-";
-        const string InactiveBomb = "0";
+        private const string princess = "G";
+        private const string Player = "B";
+        private const string emptyCell = "-";
+        private const string inactiveBomb = "*";
 
         public const byte mapHorizontal = 10;
         public const byte mapVertical = 10;
-        const byte countBomb = 10;
+        public const byte countBomb = 10;
 
         string[][] cellMap;
 
@@ -33,7 +33,7 @@ namespace Samulev_ThePrincess
                 cellMap[bombPosition / mapVertical][bombPosition % mapHorizontal] = random.Next(1, 10).ToString();
             }
 
-            cellMap[mapVertical - 1][mapHorizontal - 1] = Princess;
+            cellMap[mapVertical - 1][mapHorizontal - 1] = princess;
         }
 
        public void PaintMap(Player player)
@@ -55,7 +55,7 @@ namespace Samulev_ThePrincess
                     }
                     else if(cellMap[row][colunm] == null)
                     {
-                        Console.Write(EmptyCell);
+                        Console.Write(emptyCell);
                     }
                     else
                     {
@@ -63,11 +63,11 @@ namespace Samulev_ThePrincess
                         {
                             if(damage != 0)
                             {
-                                Console.Write(EmptyCell);
+                                Console.Write(emptyCell);
                             }
                             else
                             {
-                                Console.Write(InactiveBomb);
+                                Console.Write(inactiveBomb);
                             }
                         }
                         else

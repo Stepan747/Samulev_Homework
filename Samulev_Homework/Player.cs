@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Samulev_ThePrincess
 {
-    class Player
+    public class Player
     {
         private int coordinateHorizontal;
         private int coordinateVertical;

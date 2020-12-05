@@ -2,30 +2,33 @@
 
 namespace Samulev_ThePrincess
 {
-    class Game
+    public class Game
     {
         private Map map;
         private Player player;
-        public static string GameResult = null;
+        public static string gameResult = null;
 
-        const string RestartGame = "Do you wont restart?";
+        private const string restartGame = "Do you wont restart?";
+        private const string zero = "0";
+        private const string statusWin = "!!!You WIN!!!";
+        private const string statusLose = "You lose!";
 
         public Game()
         {
             map = new Map();
             player = new Player();
-            GameResult = null;
+            gameResult = null;
         }
 
         public void StartGame()
         {
-            while(GameResult == null)
+            while(gameResult == null)
             {
                 switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.S:
                     case ConsoleKey.DownArrow:
-                        player.CoordinateVertical = 1;                       
+                        player.CoordinateVertical = 1;
                         break;
                     case ConsoleKey.W:
                     case ConsoleKey.UpArrow:
@@ -38,32 +41,34 @@ namespace Samulev_ThePrincess
                     case ConsoleKey.D:
                     case ConsoleKey.RightArrow:
                         player.CoordinateHorizontal = +1;
-                        break;                      
+                        break;
+                    default:
+                        break;
                 }
 
                 Console.Clear();
                 map.PaintMap(player);
             }
 
-            Console.WriteLine(GameResult + RestartGame);
+            Console.WriteLine(gameResult + restartGame);
         }
 
         public static void CheckPosition(Player player, ref string cell)
         {
             if (player.CoordinateHorizontal == 9 && player.CoordinateVertical == 9)
             {
-                Game.GameResult = "!!!You WIN!!!";
+                Game.gameResult = statusWin;
             }
-            else if (cell != "0")
+            else if (cell != zero)
             {
                 player.HP -= Convert.ToInt32(cell);
 
                 if (player.HP < 1)
                 {
-                    Game.GameResult = "You lose!";
+                    Game.gameResult = statusLose;
                 }
 
-                cell = "0";
+                cell = zero;
             }
         }
     }
