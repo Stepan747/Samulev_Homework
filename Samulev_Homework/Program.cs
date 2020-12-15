@@ -6,7 +6,7 @@ namespace Samulev_Homework
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            //Tut budiet cod v buduuschem,
         }
     }
 }
