@@ -4,9 +4,26 @@ namespace Samulev_Homework
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            //Tut budiet cod v buduuschem,
+            int personChoose;
+
+            while (!(Int32.TryParse(Console.ReadLine(), out personChoose) && personChoose > 0)) ;
+
+            switch (personChoose)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+               
+            }
         }
     }
 }
