@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Samulev_TheBank
 {
@@ -10,6 +8,39 @@ namespace Samulev_TheBank
         {
             BalanceCard = 0;
             TypeCard = ConsoleConstants.DebitCard;
+        }
+
+        public void MainActionsOnDebitCard()
+        {
+            Console.WriteLine(ConsoleConstants.MainActionsDebitCard);
+
+            int personChoose;
+
+            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+
+            switch (personChoose)
+            {
+                case 0:
+                    Account account = new Account();
+                    account.ActionsOnCards();
+                    break;
+                case 1:
+                    TransferMoneyToCard();
+                    MainActionsOnDebitCard();
+                    break;
+                case 2:
+                    TransferMoneyToCard();
+                    MainActionsOnDebitCard();
+                    break;
+                case 3:
+                    SpendBalance();
+                    MainActionsOnDebitCard();
+                    break;
+                default:
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    MainActionsOnDebitCard();
+                    break;
+            }
         }
 
         public override void TransferMoney()

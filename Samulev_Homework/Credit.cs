@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Samulev_TheBank
+﻿namespace Samulev_TheBank
 {
     public class Credit
     {

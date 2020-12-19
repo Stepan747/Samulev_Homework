@@ -5,9 +5,75 @@ namespace Samulev_TheBank
 {
     public class Account
     {
-        public static int BalanceAccount { get; set; }
+        public static int Balance { get; set; }
 
         public static List<Card> Cards;
+
+        public void ActionsOnCards()
+        {
+            Console.WriteLine(ConsoleConstants.MainActionsAccount);
+
+            int personChoose;
+
+            while (! (Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+
+            switch (personChoose)
+            {
+                case 1:
+                    CreateCard();
+                    ActionsOnCards();
+                    break;
+                case 2:
+                    OutputCards();
+                    ActionsOnCards();
+                    break;
+                case 3:
+                    TopUpBalance();
+                    ActionsOnCards();
+                    break;
+                case 4:
+                    ChooseCardTopUpBalance();
+                    break;
+                case 5:
+                    ChooseCreditOrDebitCard();
+                    break;
+                default:
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    break;
+            }
+        }
+
+        public void ChooseCreditOrDebitCard()
+        {
+            Account account = new Account();
+
+            CreditCard creditCard = new CreditCard();
+
+            DebitCard debitCard = new DebitCard();
+
+            Console.WriteLine(ConsoleConstants.ChooseCreditOrDebitCard);
+
+            int personChoose;
+
+            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+
+            switch (personChoose)
+            {
+                case 0:
+                    account.ActionsOnCards();
+                    break;
+                case 1:
+                    creditCard.MainActionsOnCreditCard();
+                    break;
+                case 2:
+                    debitCard.MainActionsOnDebitCard();
+                    break;
+                default:
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    ChooseCreditOrDebitCard();
+                    break;
+            }
+        }
 
         public void CheckCreditCards()
         {
@@ -19,6 +85,10 @@ namespace Samulev_TheBank
                     {
                         ((CreditCard)card).Credits[countOfCredits].LoanAccrual();
                     }
+                }
+                else
+                {
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
                 }
             }
         }
@@ -65,7 +135,7 @@ namespace Samulev_TheBank
 
             while (!(Int32.TryParse(Console.ReadLine(), out balanceAccount)) && balanceAccount > 0);
 
-            BalanceAccount += balanceAccount;
+            Balance += balanceAccount;
         }
 
         public void ChooseCardTopUpBalance()

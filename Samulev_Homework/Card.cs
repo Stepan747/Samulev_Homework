@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Samulev_TheBank
 {
@@ -20,10 +18,10 @@ namespace Samulev_TheBank
 
             while (!(Int32.TryParse(Console.ReadLine(), out transferToCard)))
             {
-                if (transferToCard > 0 && transferToCard <= Account.BalanceAccount)
+                if (transferToCard > 0 && transferToCard <= Account.Balance)
                 {
                     BalanceCard += transferToCard;
-                    Account.BalanceAccount -= transferToCard;
+                    Account.Balance -= transferToCard;
                 }
                 else
                 {
@@ -57,7 +55,7 @@ namespace Samulev_TheBank
                 else
                 {
                     BalanceCard -= howMoney;
-                    Account.BalanceAccount += howMoney;
+                    Account.Balance += howMoney;
                     Console.WriteLine(ConsoleConstants.CompliteOperation);
                 }
             }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Samulev_TheBank
 {
@@ -12,6 +11,44 @@ namespace Samulev_TheBank
             BalanceCard = 0;
             TypeCard = ConsoleConstants.CreditCard;
             Credits = new List<Credit>();
+        }
+
+        public void MainActionsOnCreditCard()
+        {
+            Account account = new Account();
+
+            Console.WriteLine(ConsoleConstants.MainActionsCreditCard);
+
+            int personChoose;
+
+            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+
+            switch (personChoose)
+            {
+                case 0:
+                    account.ActionsOnCards();
+                    break;
+                case 1:
+                    TakeLoan();
+                    MainActionsOnCreditCard();
+                    break;
+                case 2:
+                    PayCredit();
+                    MainActionsOnCreditCard();
+                    break;
+                case 3:
+                    TransferMoney();
+                    MainActionsOnCreditCard();
+                    break;
+                case 4:
+                    TransferMoneyToCard(); 
+                    MainActionsOnCreditCard();
+                    break;
+                default:
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    MainActionsOnCreditCard();
+                    break;
+            }
         }
 
         public void TakeLoan()
