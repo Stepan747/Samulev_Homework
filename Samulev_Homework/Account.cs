@@ -77,8 +77,6 @@ namespace Samulev_TheBank
 
         public void CheckCreditCards()
         {
-            CreditCard creditCard = new CreditCard();
-
             foreach (Card card in Cards)
             {
                 if (card as CreditCard != null)
