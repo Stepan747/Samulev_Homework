@@ -77,12 +77,15 @@ namespace Samulev_TheBank
 
         public void CheckCreditCards()
         {
+            CreditCard creditCard = new CreditCard();
+
             foreach (Card card in Cards)
             {
-                if (card.TypeCard == ConsoleConstants.CreditCard)
+                if (card as CreditCard != null)
                 {
                     for (int countOfCredits = 0; countOfCredits < ((CreditCard)card).Credits.Count; countOfCredits++)
                     {
+                        Console.WriteLine(ConsoleConstants.CompliteOperation);
                         ((CreditCard)card).Credits[countOfCredits].LoanAccrual();
                     }
                 }
@@ -112,6 +115,7 @@ namespace Samulev_TheBank
                     break;
                 default:
                     Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    ActionsOnCards();
                     break;
             }
         }
