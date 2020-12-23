@@ -4,10 +4,17 @@ namespace Samulev_TheBank
 {
     public class DebitCard : Card
     {
+        private Random random;
+
         public DebitCard()
         {
             BalanceCard = 0;
-            TypeCard = ConsoleConstants.DebitCard;
+            random = new Random();
+
+            for (int length = 0; length < NumberLength; length++)
+            {
+                Number += random.Next(0, 9).ToString();
+            }
         }
 
         public void MainActionsOnDebitCard()
@@ -16,16 +23,14 @@ namespace Samulev_TheBank
 
             int personChoose;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+            while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
 
             switch (personChoose)
             {
                 case 0:
-                    Account account = new Account();
-                    account.ActionsOnCards();
-                    break;
+                    return;
                 case 1:
-                    TransferMoneyToCard();
+                    TransferMoneyToAccount();
                     MainActionsOnDebitCard();
                     break;
                 case 2:
@@ -51,7 +56,7 @@ namespace Samulev_TheBank
             if (Account.Cards.Count > 0)
             {
                 Console.WriteLine(ConsoleConstants.TranslationDiriction);
-                while (!(Int32.TryParse(Console.ReadLine(), out chooseTransfer))) ;
+                while (!int.TryParse(Console.ReadLine(), out chooseTransfer)) ;
 
                 if (chooseTransfer > 0 && chooseTransfer <= Account.Cards.Count)
                 {
@@ -60,11 +65,11 @@ namespace Samulev_TheBank
                     switch (chooseTransfer)
                     {
                         case 0:
-                            while (!(Int32.TryParse(Console.ReadLine(), out transferMoney))) ;
+                            while (!int.TryParse(Console.ReadLine(), out transferMoney)) ;
                             TransferMoneyToAccount();
                             break;
                         case 1:
-                            while (!(Int32.TryParse(Console.ReadLine(), out transferMoney))) ;
+                            while (!int.TryParse(Console.ReadLine(), out transferMoney)) ;
                             TransferMoneyToCard();
                             break;
                     }                  
@@ -81,13 +86,13 @@ namespace Samulev_TheBank
             if (Account.Cards.Count > 0)
             {
                 Console.WriteLine(ConsoleConstants.TranslationDiriction);
-                while (!(Int32.TryParse(Console.ReadLine(), out recipientsCard) && recipientsCard > 0)) ;
+                while (!int.TryParse(Console.ReadLine(), out recipientsCard) && recipientsCard > 0) ;
 
-                if (this != Account.Cards[recipientsCard])
+                if (recipientsCard < Account.Cards.Count && this != Account.Cards[recipientsCard])
                 {
                     Console.WriteLine(ConsoleConstants.InputSumm);
 
-                    while (!(Int32.TryParse(Console.ReadLine(), out transferMoney) && transferMoney > 0)) ;
+                    while (!int.TryParse(Console.ReadLine(), out transferMoney) && transferMoney > 0) ;
 
                     if (BalanceCard >= transferMoney)
                     {

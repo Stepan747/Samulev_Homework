@@ -28,8 +28,8 @@
         public const string MainActionsCreditCard = "0 - Main menu\n1 - Take loan\n2 - Pay credit\n" +
             "3 - Transfer maney to account\n4 - Transfer money to card";
         public const string MainActionsDebitCard = "0 - Main menu\n1 - Transfer maney to account\n" +
-            "4 - Transfer money to card";
-
+            "2 - Transfer money to card";
+        public const string NoneCards = "You haven't cards";
 
         public const int LengthNomberAccount = 20;
     }

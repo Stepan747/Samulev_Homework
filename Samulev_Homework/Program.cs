@@ -6,7 +6,7 @@
         {
             Account account = new Account();
 
-            account.ActionsOnCards();
+            account.ActionsOnAccount();
         }
     }
 }

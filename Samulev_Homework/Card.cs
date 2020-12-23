@@ -4,6 +4,8 @@ namespace Samulev_TheBank
 {
     public abstract class Card
     {
+        public const int NumberLength = 16;
+
         public string Number { get; protected set; }
 
         public int BalanceCard { get; set; }
@@ -16,17 +18,18 @@ namespace Samulev_TheBank
 
             int transferToCard;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out transferToCard)))
+            while (!int.TryParse(Console.ReadLine(), out transferToCard)) ;
+
+            if (transferToCard > 0 && transferToCard <= Account.Balance)
             {
-                if (transferToCard > 0 && transferToCard <= Account.Balance)
-                {
-                    BalanceCard += transferToCard;
-                    Account.Balance -= transferToCard;
-                }
-                else
-                {
-                    Console.WriteLine(ConsoleConstants.IncorrectInput);
-                }
+                BalanceCard += transferToCard;
+                Account.Balance -= transferToCard;
+
+                Console.WriteLine(ConsoleConstants.CompliteOperation);
+            }
+            else
+            {
+                Console.WriteLine(ConsoleConstants.IncorrectInput);
             }
         }
 
@@ -66,7 +69,7 @@ namespace Samulev_TheBank
 
             int inputSumm;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out inputSumm))) ;
+            while (!int.TryParse(Console.ReadLine(), out inputSumm)) ;
 
             if (inputSumm > 0 & inputSumm <= BalanceCard)
             {

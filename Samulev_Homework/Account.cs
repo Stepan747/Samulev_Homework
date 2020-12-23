@@ -9,69 +9,76 @@ namespace Samulev_TheBank
 
         public static List<Card> Cards;
 
-        public void ActionsOnCards()
+        public Account()
         {
-            Console.WriteLine(ConsoleConstants.MainActionsAccount);
+            Cards = new List<Card>();
+        }
 
+        public void ActionsOnAccount()
+        {
             int personChoose;
 
-            while (! (Int32.TryParse(Console.ReadLine(), out personChoose))) ;
-
-            switch (personChoose)
+            while (true)
             {
-                case 1:
-                    CreateCard();
-                    ActionsOnCards();
-                    break;
-                case 2:
-                    OutputCards();
-                    ActionsOnCards();
-                    break;
-                case 3:
-                    TopUpBalance();
-                    ActionsOnCards();
-                    break;
-                case 4:
-                    ChooseCardTopUpBalance();
-                    break;
-                case 5:
-                    ChooseCreditOrDebitCard();
-                    break;
-                default:
-                    Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    break;
+                Console.WriteLine(ConsoleConstants.MainActionsAccount);
+
+                while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
+
+                switch (personChoose)
+                {
+                    case 1:
+                        CreateCard();
+                        break;
+                    case 2:
+                        OutputCards();
+                        break;
+                    case 3:
+                        TopUpBalance();
+                        break;
+                    case 4:
+                        ChooseCardTopUpBalance();
+                        break;
+                    case 5:
+                        ChooseCardForActions();
+                        break;
+                    default:
+                        Console.WriteLine(ConsoleConstants.IncorrectInput);
+                        break;
+                }
             }
         }
 
-        public void ChooseCreditOrDebitCard()
+        public void ChooseCardForActions()
         {
-            Account account = new Account();
-
-            CreditCard creditCard = new CreditCard();
-
-            DebitCard debitCard = new DebitCard();
-
-            Console.WriteLine(ConsoleConstants.ChooseCreditOrDebitCard);
-
-            int personChoose;
-
-            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
-
-            switch (personChoose)
+            if (Cards.Count == 0)
             {
-                case 0:
-                    account.ActionsOnCards();
-                    break;
-                case 1:
-                    creditCard.MainActionsOnCreditCard();
-                    break;
-                case 2:
-                    debitCard.MainActionsOnDebitCard();
-                    break;
-                default:
-                    Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    ChooseCreditOrDebitCard();
-                    break;
+                Console.WriteLine(ConsoleConstants.NoneCards);
+                return;
+            }
+
+            int cardCount = 0;
+
+            foreach (Card card in Cards)
+            {
+                Console.WriteLine($"{cardCount++} {card.Number}");
+            }
+
+            int chooseCard;
+
+            while (!int.TryParse(Console.ReadLine(), out chooseCard)) ;
+
+            if (chooseCard > (Cards.Count - 1)) 
+            {
+                Console.WriteLine(ConsoleConstants.IncorrectInput);
+                return;
+            }
+            else if (Cards[chooseCard] as DebitCard != null)
+            {
+                ((DebitCard)Cards[chooseCard]).MainActionsOnDebitCard();
+            }
+            else
+            {
+                ((CreditCard)Cards[chooseCard]).MainActionsOnCreditCard();
             }
         }
 
@@ -101,7 +108,7 @@ namespace Samulev_TheBank
 
             int chooseType;
 
-            while (!Int32.TryParse(Console.ReadLine(), out chooseType)) ;
+            while (!int.TryParse(Console.ReadLine(), out chooseType)) ;
 
             switch (chooseType)
             {
@@ -113,13 +120,19 @@ namespace Samulev_TheBank
                     break;
                 default:
                     Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    ActionsOnCards();
+                    ActionsOnAccount();
                     break;
             }
         }
 
         public void OutputCards()
         {
+            if (Cards.Count == 0)
+            {
+                Console.WriteLine(ConsoleConstants.NoneCards);
+                return;
+            }
+
             int countCards = 0;
 
             foreach (Card card in Cards)
@@ -135,24 +148,33 @@ namespace Samulev_TheBank
 
             int balanceAccount;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out balanceAccount)) && balanceAccount > 0);
+            while (!int.TryParse(Console.ReadLine(), out balanceAccount) && balanceAccount > 0);
 
             Balance += balanceAccount;
+
+            Console.WriteLine(Balance);
         }
 
         public void ChooseCardTopUpBalance()
         {
             Console.WriteLine(ConsoleConstants.CardNumber);
 
+            int cardCount = 0;
+
+            foreach (Card card in Cards)
+            {
+                Console.WriteLine($"{cardCount++} {card.Number}");
+            }
+
             int numberCardList;
 
             if (Cards.Count > 0)
             {                
-                while (!(Int32.TryParse(Console.ReadLine(), out numberCardList))) ;
+                while (!int.TryParse(Console.ReadLine(), out numberCardList)) ;
 
-                if (numberCardList > 0 && numberCardList < Cards.Count)
+                if (numberCardList >= 0 && numberCardList < Cards.Count)
                 {
-                    Cards[numberCardList - 1].TopUpCardBalance();
+                    Cards[numberCardList].TopUpCardBalance();
                 }
                 else
                 {

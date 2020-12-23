@@ -5,29 +5,34 @@ namespace Samulev_TheBank
 {
     public class CreditCard : Card
     {
+        private Random random;
         public List<Credit> Credits;
+
         public CreditCard()
         {
             BalanceCard = 0;
-            TypeCard = ConsoleConstants.CreditCard;
             Credits = new List<Credit>();
+            random = new Random();
+
+            for(int length = 0; length < NumberLength; length++)
+            {
+                Number += random.Next(0, 9).ToString();
+            }
         }
 
         public void MainActionsOnCreditCard()
         {
-            Account account = new Account();
 
             Console.WriteLine(ConsoleConstants.MainActionsCreditCard);
 
             int personChoose;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out personChoose))) ;
+            while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
 
             switch (personChoose)
             {
                 case 0:
-                    account.ActionsOnCards();
-                    break;
+                    return;
                 case 1:
                     TakeLoan();
                     MainActionsOnCreditCard();
@@ -58,9 +63,9 @@ namespace Samulev_TheBank
             int valueMonth;
             int loanSumm;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out valueMonth) && valueMonth > 0)) ;
+            while (!int.TryParse(Console.ReadLine(), out valueMonth) && valueMonth > 0) ;
 
-            while (!(Int32.TryParse(Console.ReadLine(), out loanSumm) && loanSumm > 0)) ;          
+            while (!int.TryParse(Console.ReadLine(), out loanSumm) && loanSumm > 0) ;          
 
             Credits.Add(new Credit(valueMonth, loanSumm));
         }
@@ -73,7 +78,7 @@ namespace Samulev_TheBank
             int payCredit;
             int countCredit = 0;            
 
-            while (!(Int32.TryParse(Console.ReadLine(), out numberCredit) && numberCredit >= 0)) ;
+            while (!int.TryParse(Console.ReadLine(), out numberCredit) && numberCredit >= 0) ;
 
             foreach (Credit credit in Credits)
             {
@@ -85,7 +90,7 @@ namespace Samulev_TheBank
             {
                 Console.WriteLine(ConsoleConstants.InputSumm);
 
-                while (!(Int32.TryParse(Console.ReadLine(), out payCredit) && payCredit >= 0)) ;   
+                while (!int.TryParse(Console.ReadLine(), out payCredit) && payCredit >= 0) ;   
                 
                 if (payCredit <= Credits[numberCredit].CreditDebt && payCredit <= BalanceCard)
                 {
@@ -123,7 +128,7 @@ namespace Samulev_TheBank
             if (Account.Cards.Count > 0 && CheckDebtCredit() == false)
             {
                 Console.WriteLine(ConsoleConstants.TranslationDiriction);
-                while (!(Int32.TryParse(Console.ReadLine(), out chooseTransfer))) ;
+                while (!int.TryParse(Console.ReadLine(), out chooseTransfer)) ;
 
                 if (chooseTransfer > 0 && chooseTransfer <= Account.Cards.Count)
                 {
@@ -132,11 +137,11 @@ namespace Samulev_TheBank
                     switch (chooseTransfer)
                     {
                         case 0:
-                            while (!(Int32.TryParse(Console.ReadLine(), out transferMoney))) ;
+                            while (!(int.TryParse(Console.ReadLine(), out transferMoney))) ;
                             TransferMoneyToAccount();
                             break;
                         case 1:
-                            while (!(Int32.TryParse(Console.ReadLine(), out transferMoney))) ;
+                            while (!(int.TryParse(Console.ReadLine(), out transferMoney))) ;
                             TransferMoneyToCard();
                             break;
                     }
@@ -161,13 +166,13 @@ namespace Samulev_TheBank
             if (Account.Cards.Count > 0 && CheckDebtCredit() == false)
             {
                 Console.WriteLine(ConsoleConstants.TranslationDiriction);
-                while (!(Int32.TryParse(Console.ReadLine(), out recipientsCard) && recipientsCard > 0)) ;
+                while (!int.TryParse(Console.ReadLine(), out recipientsCard) && recipientsCard > 0) ;
 
                 if (this != Account.Cards[recipientsCard])
                 {
                     Console.WriteLine(ConsoleConstants.InputSumm);
 
-                    while (!(Int32.TryParse(Console.ReadLine(), out transferMoney) && transferMoney > 0)) ;
+                    while (!int.TryParse(Console.ReadLine(), out transferMoney) && transferMoney > 0) ;
 
                     if (BalanceCard >= transferMoney)
                     {
