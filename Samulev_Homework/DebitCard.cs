@@ -17,7 +17,7 @@ namespace Samulev_TheBank
             }
         }
 
-        public void MainActionsOnDebitCard()
+        public override void ChooseActions()
         {
             Console.WriteLine(ConsoleConstants.MainActionsDebitCard);
 
@@ -31,22 +31,18 @@ namespace Samulev_TheBank
                     return;
                 case 1:
                     TransferMoneyToAccount();
-                    MainActionsOnDebitCard();
                     break;
                 case 2:
                     TransferMoneyToCard();
-                    MainActionsOnDebitCard();
                     break;
                 case 3:
                     SpendBalance();
-                    MainActionsOnDebitCard();
                     break;
                 default:
                     Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    MainActionsOnDebitCard();
                     break;
             }
-        }
+        }       
 
         public override void TransferMoney()
         {       

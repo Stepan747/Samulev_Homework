@@ -2,17 +2,18 @@
 {
     public class ConsoleConstants
     {
+        public const string AccountBalance = "Account Balance: ";
         public const string DebitCard = "Debit";
         public const string CreditCard = "Credit";
         public const string CardNumber = "Card Number: ";
-        public const string CardBalance = "Card Balance: ";
+        public const string CardBalance = " Card Balance: ";
         public const string CreateCard = "Create Card: ";
         public const string TypeCards = "0-Debit\n1-Credit";
         public const string TranslationDiriction = "Input translation diriction: ";
         public const string NumberOfSelectedCard = "Number of the selected card: ";
         public const string ChooseBalanceOrCard = "Balance Account - 0\nCard - 1\n";
         public const string IncorrectInput = "!incorrect input!\n";
-        public const string CompliteOperation = "Complite Operation!";
+        public const string CompliteOperation = "Operation complite!\n";
         public const string InputSumm = "Input summ: ";
         public const string ChooseCard = "Choose card: ";
         public const string NumberCard = "Input nuber card: ";

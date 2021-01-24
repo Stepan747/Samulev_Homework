@@ -20,42 +20,6 @@ namespace Samulev_TheBank
             }
         }
 
-        public void MainActionsOnCreditCard()
-        {
-
-            Console.WriteLine(ConsoleConstants.MainActionsCreditCard);
-
-            int personChoose;
-
-            while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
-
-            switch (personChoose)
-            {
-                case 0:
-                    return;
-                case 1:
-                    TakeLoan();
-                    MainActionsOnCreditCard();
-                    break;
-                case 2:
-                    PayCredit();
-                    MainActionsOnCreditCard();
-                    break;
-                case 3:
-                    TransferMoney();
-                    MainActionsOnCreditCard();
-                    break;
-                case 4:
-                    TransferMoneyToCard(); 
-                    MainActionsOnCreditCard();
-                    break;
-                default:
-                    Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    MainActionsOnCreditCard();
-                    break;
-            }
-        }
-
         public void TakeLoan()
         {
             Console.WriteLine(ConsoleConstants.InputLoanSumm);
@@ -193,6 +157,36 @@ namespace Samulev_TheBank
             else
             {
                 Console.WriteLine(ConsoleConstants.IncorrectInput);
+            }
+        }
+
+        public override void ChooseActions()
+        {
+            Console.WriteLine(ConsoleConstants.MainActionsCreditCard);
+
+            int personChoose;
+
+            while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
+
+            switch (personChoose)
+            {
+                case 0:
+                    return;
+                case 1:
+                    TakeLoan();
+                    break;
+                case 2:
+                    PayCredit();
+                    break;
+                case 3:
+                    TransferMoney();
+                    break;
+                case 4:
+                    TransferMoneyToCard();
+                    break;
+                default:
+                    Console.WriteLine(ConsoleConstants.IncorrectInput);
+                    break;
             }
         }
     }

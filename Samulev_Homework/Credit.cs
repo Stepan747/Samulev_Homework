@@ -25,6 +25,5 @@
             CreditDebt += MonthlyPayment;
             CreditMonths--;
         }
-
     }
 }

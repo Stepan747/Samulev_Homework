@@ -14,6 +14,8 @@ namespace Samulev_TheBank
 
         public void TopUpCardBalance()
         {
+            Console.WriteLine(ConsoleConstants.AccountBalance + Account.Balance);
+
             Console.WriteLine(ConsoleConstants.InputSumm);
 
             int transferToCard;
@@ -84,6 +86,8 @@ namespace Samulev_TheBank
 
         public abstract void TransferMoneyToCard();
 
-        public abstract void TransferMoney();       
-    }       
+        public abstract void TransferMoney();
+
+        public abstract void ChooseActions();
+    }
 }

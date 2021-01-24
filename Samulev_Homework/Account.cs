@@ -14,40 +14,6 @@ namespace Samulev_TheBank
             Cards = new List<Card>();
         }
 
-        public void ActionsOnAccount()
-        {
-            int personChoose;
-
-            while (true)
-            {
-                Console.WriteLine(ConsoleConstants.MainActionsAccount);
-
-                while (!int.TryParse(Console.ReadLine(), out personChoose)) ;
-
-                switch (personChoose)
-                {
-                    case 1:
-                        CreateCard();
-                        break;
-                    case 2:
-                        OutputCards();
-                        break;
-                    case 3:
-                        TopUpBalance();
-                        break;
-                    case 4:
-                        ChooseCardTopUpBalance();
-                        break;
-                    case 5:
-                        ChooseCardForActions();
-                        break;
-                    default:
-                        Console.WriteLine(ConsoleConstants.IncorrectInput);
-                        break;
-                }
-            }
-        }
-
         public void ChooseCardForActions()
         {
             if (Cards.Count == 0)
@@ -67,18 +33,18 @@ namespace Samulev_TheBank
 
             while (!int.TryParse(Console.ReadLine(), out chooseCard)) ;
 
-            if (chooseCard > (Cards.Count - 1)) 
+            if (chooseCard > (Cards.Count + 1)) 
             {
                 Console.WriteLine(ConsoleConstants.IncorrectInput);
                 return;
             }
             else if (Cards[chooseCard] as DebitCard != null)
             {
-                ((DebitCard)Cards[chooseCard]).MainActionsOnDebitCard();
+                ((DebitCard)Cards[chooseCard]).ChooseActions();
             }
             else
             {
-                ((CreditCard)Cards[chooseCard]).MainActionsOnCreditCard();
+                ((CreditCard)Cards[chooseCard]).ChooseActions();
             }
         }
 
@@ -104,6 +70,7 @@ namespace Samulev_TheBank
         public void CreateCard()
         {
             Console.WriteLine(ConsoleConstants.CreateCard);
+
             Console.WriteLine(ConsoleConstants.TypeCards);
 
             int chooseType;
@@ -120,7 +87,6 @@ namespace Samulev_TheBank
                     break;
                 default:
                     Console.WriteLine(ConsoleConstants.IncorrectInput);
-                    ActionsOnAccount();
                     break;
             }
         }
@@ -144,6 +110,8 @@ namespace Samulev_TheBank
 
         public void TopUpBalance()
         {
+            Console.WriteLine(ConsoleConstants.AccountBalance + Balance);
+
             Console.WriteLine(ConsoleConstants.InputSumm);
 
             int balanceAccount;
@@ -152,11 +120,13 @@ namespace Samulev_TheBank
 
             Balance += balanceAccount;
 
-            Console.WriteLine(Balance);
+            Console.WriteLine(ConsoleConstants.CompliteOperation + ConsoleConstants.AccountBalance + Balance);
         }
 
         public void ChooseCardTopUpBalance()
         {
+            Console.WriteLine(ConsoleConstants.AccountBalance + Balance);
+
             Console.WriteLine(ConsoleConstants.CardNumber);
 
             int cardCount = 0;
